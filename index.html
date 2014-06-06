@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/custom.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.js"></script>
+		<script>
+			var myApp = angular.module('MyApp', []);
+		</script>
+	</head>
+
+	<body ng-app="MyApp">
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-markdown>
+					<script type="text/template">
+						![AngularJS Logo](img/AngularJS-logo-large.png)
+						####HTML enhanced for web apps!
+						<br/><br/>
+						<small>Présenté par Olivier Combe / <img src="img/twitter.png" style="margin: 4px 0 0; height: 18px;"> [@OCombe](http://twitter.com/ocombe) / <img src="img/github.png" style="margin: 0"> [OCombe](http://github.com/ocombe)</small>
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						###Qu'est ce qu'AngularJS ?
+
+						---
+
+						####Un framework javascript parmi d'autres:
+
+						- Backbone.JS
+
+						- AngularJS
+
+						- EmberJS
+
+						- MeteorJS
+
+						- Knockout
+
+						Note:
+						Framework = pas une librairie, générique, détermine la façon d'écrire le code, spécialisable via des librairies
+
+						---
+
+						- Développé par Google
+
+						- 100% javascript et html (pas de précompilation) <!-- .element: class="fragment" -->
+
+						- ~MVC Front-end <!-- .element: class="fragment" -->
+
+						- IE8+ jusqu'à 1.2.x, IE9+ à partir de 1.3 <!-- .element: class="fragment" -->
+
+						---
+
+						####Pourquoi choisir AngularJS ?
+
+						- Permet d'étendre le HTML (directives) <!-- .element: class="fragment" -->
+						
+						- Binding bi-directionnel <!-- .element: class="fragment" -->
+
+						- Inclut jquery lite <!-- .element: class="fragment" -->
+
+						- Testable (unitaire & e2e) <!-- .element: class="fragment" -->
+
+						- Injection de dépendances <!-- .element: class="fragment" -->
+
+						- Très complet <!-- .element: class="fragment" -->
+
+						- Très fun (en toute objectivité) <!-- .element: class="fragment" -->
+
+						- Très grosse communauté (> 800 000 developpeurs) <!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						[![AngularJS Trending](img/trending.png)](http://www.google.com/trends/explore?hl=fr#q=Backbone.js,+AngularJS,+MeteorJS,+EmberJS,+Knockout+js&date=10/2010+44m&cmpt=q)
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Des inconvénients ?<br/><br/>
+						- Une documentation inégale <!-- .element: class="fragment" -->
+
+						- Pas très copain avec le SEO (ça change!) <!-- .element: class="fragment" -->
+
+						- Une courbe d'apprentissage chaotique <!-- .element: class="fragment" -->
+
+						---
+
+						![AngularJS learning curve](img/feelings_about_angularjs_over_time.png)
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Comment ça marche ?
+						<br/>
+						<pre><code>&lt;!DOCTYPE html&gt;
+						&lt;html ng-app&gt;
+							&lt;head&gt;
+								&lt;title&gt;Mon application&lt;/title&gt;
+								&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js&quot;&gt;&lt;/script&gt;
+							&lt;/head&gt;
+							&lt;body&gt;
+								&lt;input ng-model=&quot;name&quot; type=&quot;text&quot; placeholder=&quot;Ton nom&quot;&gt;
+								&lt;p&gt;Hello {{ name }}&lt;/p&gt;
+							&lt;/body&gt;
+						&lt;/html&gt;</code></pre>
+					</script>
+				</section>
+
+				<section>
+					<input ng-model="name" type="text" placeholder="Ton nom"><br/><br/>
+
+					<p>Bonjour {{ name }}</p>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####C'est bien, mais en vrai, il est où le MVC ?
+						<br/>
+
+						- On fait un module : <!-- .element: class="fragment" -->
+							- Isolé (équivalent d'un namespace) <!-- .element: class="fragment" -->
+							- Partageable <!-- .element: class="fragment" -->
+							- L'application est elle même un module <!-- .element: class="fragment" -->
+
+						<br/>
+						<pre><code>&lt;html ng-app="MyApp"&gt;
+							...
+						&lt;/html&gt;</code></pre> <!-- .element: class="fragment" -->
+						<pre><code>var myApp = angular.module('MyApp', []);</code></pre> <!-- .element: class="fragment" -->
+
+						---
+
+						Et on ajoute un controlleur :
+
+						<pre><code>&lt;html ng-app="MyApp"&gt;
+							&lt;div ng-controller="MyCtrl"&gt;
+								Secondes: {{ seconds }}
+							&lt;/div&gt;
+						&lt;/html&gt;</code></pre>
+
+						```js
+						myApp.controller('MyCtrl', function($scope, $interval) {
+							$scope.seconds = 0;
+
+							$interval(function() {
+								$scope.seconds++;
+							}, 1000);
+						});
+						```
+					</script>
+				</section>
+
+				<section>
+					<div ng-app="MyApp">
+						<div ng-controller="MyCtrl">
+							Secondes: {{ seconds }}
+						</div>
+					</div>
+					<script>
+						myApp.controller('MyCtrl', function($scope, $interval) {
+							$scope.seconds = 0;
+
+							$interval(function() {
+								$scope.seconds++;
+							}, 1000);
+						});
+					</script>
+
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Qu'est ce que `$scope` ?
+						- l'équivalent des modèles de l'application et utilisant un héritage réplicant la structure du DOM ($rootScope) <!-- .element: class="fragment" -->
+						![Data binding](img/concepts-databinding1.png) <!-- .element: class="fragment" -->
+
+						- un moyen d'échanger des données entre vue et controlleur <!-- .element: class="fragment" -->
+						- le contexte d'exécution des expressions ($apply) <!-- .element: class="fragment" -->
+						- un moyen d'observer des expressions ($watch, dirty checking) <!-- .element: class="fragment" -->
+						- un moyen de propager/recevoir des events (de façon hierarchique, $emit / $broadcast / $on) <!-- .element: class="fragment" -->
+
+						Note:
+						Utiliser ng-app inspector sur la slide 7 pour illustrer la hierarchie
+
+						---
+
+						###Les expressions
+						- Toute propriété ou méthode appelée dans une expression fait référence au $scope (et à ses parents) <!-- .element: class="fragment" data-fragment-index="1" -->
+
+						-  <!-- .element: class="fragment" data-fragment-index="2" --> `{{ seconds }}` équivaut à  <!-- .element: class="fragment" data-fragment-index="2" --> `$scope.seconds` <!-- .element: class="fragment" data-fragment-index="2" -->
+
+						- On peut utiliser <!-- .element: class="fragment" -->
+							- les opérateurs (=, ==, ===, !=, <, <=, +, -, *, %, && ...) <!-- .element: class="fragment" -->
+							- les mots clés (true, false, null, undefined) <!-- .element: class="fragment" -->
+							- les expressions ternaires (value ? res1 : res2) <!-- .element: class="fragment" -->
+							- les filtres (data | filterA)  <!-- .element: class="fragment" -->
+
+						<pre><code>{{ today | date:'dd/mm/yyyy' }}</code></pre><!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Injection de dépendances (DI)<br/><br/>
+						- Un design pattern permettant aux composants d'accéder à leur dépendances <!-- .element: class="fragment" data-fragment-index="1" -->
+
+						<pre><code>var myApp = angular.module('MyApp', ['ui.router']);</code></pre> <!-- .element: class="fragment" data-fragment-index="1" -->
+
+						<pre><code>myApp.controller('MyCtrl', function($scope, $interval) {
+							...
+						});</code></pre> <!-- .element: class="fragment" data-fragment-index="1" -->
+
+						![AngularJS DI](img/concepts-module-injector.png) <!-- .element: class="fragment" -->
+
+						---
+
+						#####Attention à la minification...
+						<pre><code>myApp.controller('MyCtrl', function($scope, $interval) {
+							...
+						});</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>a.controller('MyCtrl', function(b, c) {
+							...
+						});</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>myApp.controller('MyCtrl',
+							['$scope' , '$interval', function($scope, $interval) {
+								...
+							}]
+						);</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>a.controller('MyCtrl', ['$scope' , '$interval', function(b, c) {
+							...
+						}]);</code></pre> <!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Les services<br/><br/>
+						- Gère tout ce qui est indépendant des vues <!-- .element: class="fragment" data-fragment-index="1"-->
+
+						- Est défini une fois puis injecté à la demande <!-- .element: class="fragment" data-fragment-index="2" -->
+
+						![Service](img/concepts-module-service.png) <!-- .element: class="fragment" data-fragment-index="2" -->
+
+						- Permet de partager des données entre controlleurs <!-- .element: class="fragment" data-fragment-index="3" -->
+
+						Note:
+							Ex: $ngCookies, $http, $resource
+
+						---
+
+						<pre><code>var app = angular.module('myServiceModule', [])</code></pre>
+
+						<pre><code>app.controller('MyController',
+							['$scope','notify', function ($scope, notify) {
+								$scope.callNotify = function(msg) {
+									notify(msg);
+								};
+							}]
+						)</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>app.factory('notify', ['$window', function(win) {
+							var msgs = [];
+							return function(msg) {
+								msgs.push(msg);
+								if (msgs.length == 3) {
+									win.alert(msgs.join("\n"));
+									msgs = [];
+								}
+							};
+						}]);</code></pre> <!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Les directives<br/><br/>
+						- Sont appelées via un marqueur dans le DOM (attribut, élément, commentaire ou classe CSS) <!-- .element: class="fragment" data-fragment-index="1" -->
+
+						- Sont compilées lors de leur insertion dans le DOM <!-- .element: class="fragment" data-fragment-index="2" -->
+
+						- Peuvent attacher un comportement spécifique au DOM <!-- .element: class="fragment" data-fragment-index="3" -->
+							<pre><code>&lt;button ng-click="doSomething()"&gt;&lt;/button&gt;</code></pre> <!-- .element: class="fragment" data-fragment-index="3" -->
+
+						- Peuvent modifier le DOM <!-- .element: class="fragment" data-fragment-index="4" -->
+							<pre><code>&lt;modal&gt;&lt;/modal&gt;</code></pre> <!-- .element: class="fragment" data-fragment-index="4" -->
+							<pre><code>&lt;div class="modal"&gt;&lt;/div&gt;</code></pre> <!-- .element: class="fragment" data-fragment-index="4" -->
+
+						- Peuvent surcharger des éléments html existants <!-- .element: class="fragment" -->
+
+						- Peuvent accéder au $scope et le manipuler ou en créer un nouveau isolé <!-- .element: class="fragment" -->
+
+						- Peuvent accéder aux services <!-- .element: class="fragment" -->
+
+						Note:
+							ng-repeat, ng-click, ng-model, ng-show/hide, ng-if
+
+						---
+
+						<pre><code>var docs = angular.module('docsSimpleDirective', [])</code></pre>
+
+						<pre><code>&lt;div ng-controller="Controller"&gt;
+							&lt;div my-customer&gt;&lt;/div&gt;
+						&lt;/div&gt;</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>docs.controller('Controller', ['$scope', function($scope) {
+							$scope.customer = {
+								name: 'Naomi',
+								address: '1600 Amphitheatre'
+							};
+						}])</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>docs.directive('myCustomer', function() {
+							return {
+								template: 'Name: {{customer.name}}, Address: {{customer.address}}'
+							};
+						});</code></pre> <!-- .element: class="fragment" -->
+
+						<pre><code>&lt;div ng-controller="Controller"&gt;
+							&lt;div my-customer&gt;Name: Naomi, Address: 1600 Amphitheatre&lt;/div&gt;
+						&lt;/div&gt;</code></pre> <!-- .element: class="fragment" -->
+
+						---
+
+						```js
+						docs.directive('myCustomer', function() {
+							return {
+								template: 'Name: {{customer.name}}, Address: {{customer.address}}',
+
+								link: function link($scope, $element, $attrs) {
+									$scope.customer = {
+										name: 'Naomi',
+										address: '1600 Amphitheatre'
+									};
+								}
+							};
+						});
+						```
+
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						###AngularJS est
+						- Riche <!-- .element: class="fragment" -->
+						- Novateur <!-- .element: class="fragment" -->
+						- Puissant <!-- .element: class="fragment" -->
+						- Simple à prendre en main, difficile à maîtriser <!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Quelques liens utiles<br/><br/>
+						- [Doc AngularJS](https://docs.angularjs.org/)
+
+						- [The Hitchhiker’s Guide to the Directive](http://amitgharat.wordpress.com/2013/06/08/the-hitchhikers-guide-to-the-directive/)
+
+						- [Collection de liens utiles](https://github.com/jmcunningham/AngularJS-Learning/blob/master/FR-FR.md)
+
+						- [AngularJS & SEO](http://www.yearofmoo.com/2012/11/angularjs-and-seo.html)
+
+						- [AngularJS modules](http://ngmodules.org/)
+
+						- [Angular Seed](https://github.com/angular/angular-seed)
+					</script>
+				</section>
+
+				<section data-markdown data-separator="^\n----\n$" data-vertical="^\n---\n$">
+					<script type="text/template">
+						####Quelques modules utiles<br/><br/>
+						- [UI Router](https://github.com/angular-ui/ui-router)
+
+						- [UI Bootstrap](http://angular-ui.github.io/bootstrap)
+
+						- [Angular Translate](https://github.com/PascalPrecht/angular-translate)
+
+						- [Angular LocalForage](https://github.com/ocombe/angular-localForage)
+					</script>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				keyboard: true,
+				touch: true,
+				fragments: true,
+				mouseWheel: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
